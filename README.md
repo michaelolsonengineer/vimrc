@@ -307,3 +307,248 @@ Cope mappings:
 Just do following:
 * Remove `~/.vim_runtime`
 * Remove any lines that reference `.vim_runtime` in your `~/.vimrc`
+
+## Vim Map
+v  <C-A>         <Esc><C-A>v
+n  <C-A>         ggVG
+   <C-B>         :CtrlPBuffer<CR>
+v  <C-C>         "+y
+n  <C-C>         "+y
+   <C-F>         <Plug>(ctrlp)
+v  <C-H>       * :<C-U>Hexmode<CR>
+n  <C-H>       * :Hexmode<CR>
+o  <C-H>         <C-W>h
+v  <Tab>       * >gv
+s  <NL>        * <Esc>i<Right><C-R>=snipMate#TriggerSnippet()<CR>
+nox<NL>          <C-W>j
+   <C-K>         <C-W>k
+   <C-L>         <C-W>l
+n  <C-N>         <Plug>yankstack_substitute_newer_paste
+n  <C-P>         <Plug>yankstack_substitute_older_paste
+x  <C-S>       * :<C-U>call multiple_cursors#new("v", 0)<CR>
+s  <C-S>         <Esc>:w!<CR>v
+n  <C-S>       * :call multiple_cursors#new("n", 1)<CR>
+v  <C-V>         x"+gPv
+n  <C-V>         "+gp
+n  <C-W><C-F>  * :call GotoFile("new")<CR>
+n  <C-W>f      * :call GotoFile("new")<CR>
+v  <C-X>       * "+x
+   <C-Y>         <C-R>
+v  <C-Z>         <Esc><C-Z>v
+n  <C-Z>         u
+   <Space>       /
+v  #           * :<C-U>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+v  $e          * <Esc>`>a"<Esc>`<i"<Esc>
+v  $q          * <Esc>`>a'<Esc>`<i'<Esc>
+v  $$          * <Esc>`>a"<Esc>`<i"<Esc>
+v  $3          * <Esc>`>a}<Esc>`<i{<Esc>
+v  $2          * <Esc>`>a]<Esc>`<i[<Esc>
+v  $1          * <Esc>`>a)<Esc>`<i(<Esc>
+v  *           * :<C-U>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+v  +             <Plug>(expand_region_expand)
+n  +             <Plug>(expand_region_expand)
+n  ,hp           <Plug>GitGutterPreviewHunk
+n  ,hr           <Plug>GitGutterUndoHunk:echomsg ',hr is deprecated. Use ,hu'<CR>
+n  ,hu           <Plug>GitGutterUndoHunk
+n  ,hs           <Plug>GitGutterStageHunk
+n  ,bv         & :BufExplorerVerticalSplit<CR>
+n  ,bs         & :BufExplorerHorizontalSplit<CR>
+n  ,be         & :BufExplorer<CR>
+n  ,l          * :ls<CR>
+   ,p            :cp<CR>
+   ,n            :cn<CR>
+   ,co           ggVGy:tabnew<CR>:set syntax=qf<CR>pgg
+   ,cc           :botright cope<CR>
+   ,r            :call Rescope()<CR>
+   ,g            :Ack<Space>
+   ,e            :e! ~/.vim_runtime/my_configs.vim<CR>
+n  ,d          * :GitGutterToggle<CR>
+n  ,c          * :call SyntasticCheckCoffeescript()<CR>
+n  ,z          * :Goyo<CR>
+   ,nf           :NERDTreeFind<CR>
+   ,nb           :NERDTreeFromBookmark<Space>
+   ,nn           :NERDTreeToggle<CR>
+   ,j            :CtrlP<CR>
+   ,f            :MRU<CR>
+   ,o            :BufExplorer<CR>
+   ,pp           :setlocal paste!<CR>
+   ,x            :e ~/buffer.md<CR>
+   ,q            :e ~/buffer<CR>
+   ,m          * mmHmt:%s/<C-V><CR>//ge<CR>'tzt'm
+   ,s?           z=
+   ,sa           zg
+   ,sp           [s
+   ,sn           ]s
+   ,ss           :setlocal spell!<CR>
+   ,cd           :cd %:p:h<CR>:pwd<CR>
+   ,te           :tabedit <C-R>=expand("%:p:h")<CR>/
+n  ,tl           :exe "tabn ".g:lasttab<CR>
+   ,t,           :tabnext<Space>
+   ,tm           :tabmove<Space>
+   ,tc           :tabclose<CR>
+   ,to           :tabonly<CR>
+   ,tn           :tabnew<CR>
+   ,h            :bprevious<CR>
+ov ,l            :bnext<CR>
+   ,ba           :bufdo bd<CR>
+   ,bd           :Bclose<CR>:tabclose<CR>gT
+   ,<CR>         :noh<CR>
+n  ,w            :w!<CR>
+s  0             <SNR>99_yank_with_key("0")
+nox0             ^
+s  1             <SNR>99_yank_with_key("1")
+s  2             <SNR>99_yank_with_key("2")
+s  3             <SNR>99_yank_with_key("3")
+s  4             <SNR>99_yank_with_key("4")
+s  5             <SNR>99_yank_with_key("5")
+s  6             <SNR>99_yank_with_key("6")
+s  7             <SNR>99_yank_with_key("7")
+s  8             <SNR>99_yank_with_key("8")
+s  9             <SNR>99_yank_with_key("9")
+   ;;[           :call Get_WorkSpace()<CR>
+n  ;;i           :cs find i ^<C-R>=expand("<cfile>")<CR>$
+n  ;;f           :cs find f <C-R>=expand("<cfile>")<CR>
+n  ;;e           :cs find e <C-R>=expand("<cword>")<CR>
+n  ;;t           :cs find t <C-R>=expand("<cword>")<CR>
+n  ;;c           :cs find c <C-R>=expand("<cword>")<CR>
+n  ;;d           :cs find d <C-R>=expand("<cword>")<CR>
+n  ;;g           :cs find g <C-R>=expand("<cword>")<CR>
+n  ;;s           :cs find s <C-R>=expand("<cword>")<CR>
+x  P           * :<C-U>call <SNR>99_paste_with_key("P", "v", v:register, v:count1)<CR>
+n  P           * :<C-U>call <SNR>99_paste_with_key("P", "n", v:register, v:count1)<CR>
+x  S             <Plug>VSurround
+v  Si            S(i_<Esc>f)
+n  [c            <Plug>GitGutterPrevHunk
+   \c            <Plug>toggle
+n  ]c            <Plug>GitGutterNextHunk
+s  _             <SNR>99_yank_with_key("_")
+n  _             <Plug>(expand_region_shrink)
+x  _             <Plug>(expand_region_shrink)
+s  a             <SNR>99_yank_with_key("a")
+v  aI          * :<C-U>cal <SNR>92_HandleTextObjectMapping(0, 1, 1, [line("'<"), line("'>"), col("'<"), col("'>")])<CR><Esc>gv
+o  aI          * :<C-U>cal <SNR>92_HandleTextObjectMapping(0, 1, 0, [line("."), line("."), col("."), col(".")])<CR>
+v  ai          * :<C-U>cal <SNR>92_HandleTextObjectMapping(0, 0, 1, [line("'<"), line("'>"), col("'<"), col("'>")])<CR><Esc>gv
+o  ai          * :<C-U>cal <SNR>92_HandleTextObjectMapping(0, 0, 0, [line("."), line("."), col("."), col(".")])<CR>
+x  ac            <Plug>GitGutterTextObjectOuterVisual
+o  ac            <Plug>GitGutterTextObjectOuterPending
+s  b             <SNR>99_yank_with_key("b")
+s  c             <SNR>99_yank_with_key("c")
+n  cS            <Plug>CSurround
+n  cs            <Plug>Csurround
+n  cgc           <Plug>ChangeCommentary
+n  cr            <Plug>Coerce
+s  d             <SNR>99_yank_with_key("d")
+x  d           * <SNR>99_yank_with_key("d")
+n  d           * <SNR>99_yank_with_key("d")
+n  ds            <Plug>Dsurround
+s  e             <SNR>99_yank_with_key("e")
+s  f             <SNR>99_yank_with_key("f")
+v  gx            <Plug>NetrwBrowseXVis
+n  gx            <Plug>NetrwBrowseX
+s  g             <SNR>99_yank_with_key("g")
+x  gP          * :<C-U>call <SNR>99_paste_with_key("gP", "v", v:register, v:count1)<CR>
+n  gP          * :<C-U>call <SNR>99_paste_with_key("gP", "n", v:register, v:count1)<CR>
+x  gp          * :<C-U>call <SNR>99_paste_with_key("gp", "v", v:register, v:count1)<CR>
+n  gp          * :<C-U>call <SNR>99_paste_with_key("gp", "n", v:register, v:count1)<CR>
+x  gS            <Plug>VgSurround
+n  gcu           <Plug>Commentary<Plug>Commentary
+n  gcc           <Plug>CommentaryLine
+o  gc            <Plug>Commentary
+n  gc            <Plug>Commentary
+x  gc            <Plug>Commentary
+n  gf          * :call GotoFile("")<CR>
+v  gv          * :call VisualSelection('gv', '')<CR>
+s  h             <SNR>99_yank_with_key("h")
+s  i             <SNR>99_yank_with_key("i")
+v  iI          * :<C-U>cal <SNR>92_HandleTextObjectMapping(1, 1, 1, [line("'<"), line("'>"), col("'<"), col("'>")])<CR><Esc>gv
+o  iI          * :<C-U>cal <SNR>92_HandleTextObjectMapping(1, 1, 0, [line("."), line("."), col("."), col(".")])<CR>
+v  ii          * :<C-U>cal <SNR>92_HandleTextObjectMapping(1, 0, 1, [line("'<"), line("'>"), col("'<"), col("'>")])<CR><Esc>gv
+o  ii          * :<C-U>cal <SNR>92_HandleTextObjectMapping(1, 0, 0, [line("."), line("."), col("."), col(".")])<CR>
+x  ic            <Plug>GitGutterTextObjectInnerVisual
+o  ic            <Plug>GitGutterTextObjectInnerPending
+s  j             <SNR>99_yank_with_key("j")
+s  k             <SNR>99_yank_with_key("k")
+s  l             <SNR>99_yank_with_key("l")
+s  m             <SNR>99_yank_with_key("m")
+s  n             <SNR>99_yank_with_key("n")
+s  o             <SNR>99_yank_with_key("o")
+s  p             <SNR>99_yank_with_key("p")
+x  p           * :<C-U>call <SNR>99_paste_with_key("p", "v", v:register, v:count1)<CR>
+n  p           * :<C-U>call <SNR>99_paste_with_key("p", "n", v:register, v:count1)<CR>
+s  q             <SNR>99_yank_with_key("q")
+s  r             <SNR>99_yank_with_key("r")
+s  s             <SNR>99_yank_with_key("s")
+s  t             <SNR>99_yank_with_key("t")
+s  u             <SNR>99_yank_with_key("u")
+s  v             <SNR>99_yank_with_key("v")
+s  w             <SNR>99_yank_with_key("w")
+s  x             <SNR>99_yank_with_key("x")
+s  y             <SNR>99_yank_with_key("y")
+x  y           * <SNR>99_yank_with_key("y")
+n  y           * <SNR>99_yank_with_key("y")
+n  ySS           <Plug>YSsurround
+n  ySs           <Plug>YSsurround
+n  yss           <Plug>Yssurround
+n  yS            <Plug>YSurround
+n  ys            <Plug>Ysurround
+s  z             <SNR>99_yank_with_key("z")
+   <S-Insert>    <MiddleMouse>
+v  <Plug>NetrwBrowseXVis * :<C-U>call netrw#BrowseXVis()<CR>
+n  <Plug>NetrwBrowseX * :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<CR>
+   <SNR>102_Launch * :call <SNR>102_LaunchPeepOpenViaVim()<CR>
+   <Plug>PeepOpen & <SNR>102_Launch
+x  <Plug>yankstack_after_paste * :<C-U>call <SNR>99_after_paste()<CR>
+n  <Plug>yankstack_after_paste * :call <SNR>99_after_paste()<CR>
+x  <Plug>yankstack_substitute_newer_paste * :<C-U>call <SNR>99_substitute_paste(-v:count1, 'v')<CR>
+x  <Plug>yankstack_substitute_older_paste * :<C-U>call <SNR>99_substitute_paste(v:count1, 'v')<CR>
+n  <Plug>yankstack_substitute_newer_paste * :<C-U>call <SNR>99_substitute_paste(-v:count1, 'n')<CR>
+n  <Plug>yankstack_substitute_older_paste * :<C-U>call <SNR>99_substitute_paste(v:count1, 'n')<CR>
+v  <Plug>VgSurround * :<C-U>call <SNR>97_opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR>
+v  <Plug>VSurround * :<C-U>call <SNR>97_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>
+n  <Plug>YSurround * :<C-U>set opfunc=<SNR>97_opfunc2<CR>g@
+n  <Plug>Ysurround * :<C-U>set opfunc=<SNR>97_opfunc<CR>g@
+n  <Plug>YSsurround * :<C-U>call <SNR>97_opfunc2(v:count1)<CR>
+n  <Plug>Yssurround * :<C-U>call <SNR>97_opfunc(v:count1)<CR>
+n  <Plug>CSurround * :<C-U>call <SNR>97_changesurround(1)<CR>
+n  <Plug>Csurround * :<C-U>call <SNR>97_changesurround()<CR>
+n  <Plug>Dsurround * :<C-U>call <SNR>97_dosurround(<SNR>97_inputtarget())<CR>
+n  <Plug>SurroundRepeat * .
+x  <Plug>snipMateVisual * :<C-U>call <SNR>94_grab_visual()<CR>gv"_c
+s  <Plug>snipMateBack * <Esc>a<C-R>=snipMate#BackwardsSnippet()<CR>
+s  <Plug>snipMateNextOrTrigger * <Esc>a<C-R>=snipMate#TriggerSnippet()<CR>
+n  <Plug>GitGutterPreviewHunk * :GitGutterPreviewHunk<CR>
+n  <Plug>GitGutterUndoHunk * :GitGutterUndoHunk<CR>
+n  <Plug>GitGutterStageHunk * :GitGutterStageHunk<CR>
+n  <Plug>GitGutterPrevHunk * &diff ? '[c' : ":\<C-U>execute v:count1 . 'GitGutterPrevHunk'\<CR>"
+n  <Plug>GitGutterNextHunk * &diff ? ']c' : ":\<C-U>execute v:count1 . 'GitGutterNextHunk'\<CR>"
+x  <Plug>GitGutterTextObjectOuterVisual * :<C-U>call gitgutter#hunk#text_object(0)<CR>
+x  <Plug>GitGutterTextObjectInnerVisual * :<C-U>call gitgutter#hunk#text_object(1)<CR>
+o  <Plug>GitGutterTextObjectOuterPending * :<C-U>call gitgutter#hunk#text_object(0)<CR>
+o  <Plug>GitGutterTextObjectInnerPending * :<C-U>call gitgutter#hunk#text_object(1)<CR>
+n  <SNR>88_:   * :<C-U><C-R>=v:count ? v:count : ''<CR>
+x  <Plug>(expand_region_shrink) * :<C-U>call expand_region#next('v', '-')<CR>
+x  <Plug>(expand_region_expand) * :<C-U>call expand_region#next('v', '+')<CR>
+n  <Plug>(expand_region_expand) * :<C-U>call expand_region#next('n', '+')<CR>
+n  <Plug>CommentaryUndo   <Plug>Commentary<Plug>Commentary
+n  <Plug>ChangeCommentary * c:<C-U>call <SNR>85_textobject(1)<CR>
+o  <Plug>Commentary * :<C-U>call <SNR>85_textobject(0)<CR>
+n  <Plug>CommentaryLine * :<C-U>set opfunc=<SNR>85_go|exe 'norm! 'v:count1.'g@_'<CR>
+n  <Plug>Commentary * :<C-U>set opfunc=<SNR>85_go<CR>g@
+x  <Plug>Commentary * :<C-U>call <SNR>85_go(line("'<"),line("'>"))<CR>
+n  <Plug>Coerce * :<C-U>call <SNR>84_coerce(nr2char(getchar()))<CR>
+n  <Plug>(ctrlp) * :<C-U>CtrlP<CR>
+   <Plug>toggle * :call <SNR>35_toggle()<CR>
+   <S-Right>   * :bnext<CR>
+   <S-Left>    * :bprev<CR>
+v  <S-Tab>     * <gv
+   <C-Space>     ?
+   ½             $
+x  Ð             <Plug>yankstack_substitute_newer_paste
+n  Ð             <Plug>yankstack_substitute_newer_paste
+x  ð             <Plug>yankstack_substitute_older_paste
+n  ð             <Plug>yankstack_substitute_older_paste
+v  ë             :m'<-2<CR>`>my`<mzgv`yo`z
+v  ê             :m'>+<CR>`<my`>mzgv`yo`z
+n  ë             mz:m-2<CR>`z
+n  ê             mz:m+<CR>`z
+
