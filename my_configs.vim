@@ -118,6 +118,11 @@ vmap <C-A> <ESC><C-A>v
 
 "set pastetoggle=<C-V>
 
+noremap <Leader>y "*y
+noremap <Leader>v "*p
+noremap <Leader>Y "+y
+noremap <Leader>V "+p
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " =>  Commenting blocks of code
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
