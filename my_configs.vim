@@ -9,7 +9,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => GUI related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-hi clear ColorColumn
 
 " Set font according to system
 if has("mac") || has("macunix")
@@ -36,6 +35,7 @@ else
   colorscheme peaksea
 endif
 
+hi clear ColorColumn
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Cscope / Ctags / Path / Dictionary / Thesaurus
