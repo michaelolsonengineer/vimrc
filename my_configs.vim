@@ -9,6 +9,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => GUI related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+hi clear ColorColumn
+
 " Set font according to system
 if has("mac") || has("macunix")
     set gfn=Hack:h14,Source\ Code\ Pro:h15,Menlo:h15
@@ -188,3 +190,4 @@ endfunc
 let java_space_errors = 1
 let c_no_trail_space_error = 1
 let c_no_tab_space_error = 1
+
