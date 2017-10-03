@@ -9,6 +9,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => GUI related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Set font according to system
 if has("mac") || has("macunix")
     set gfn=Hack:h14,Source\ Code\ Pro:h15,Menlo:h15
@@ -29,15 +30,11 @@ if has("gui_running")
   set t_Co=256       " set number of colors
   set background=dark
   colorscheme wombat
+  hi clear ColorColumn
 else
   set background=dark
   colorscheme peaksea
-endif
-
-if exists('+colorcolumn')
-   set colorcolumn=80
-else
-   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+  hi clear ColorColumn
 endif
 
 set ttyfast                 " faster redrawing
@@ -203,6 +200,7 @@ let java_space_errors = 1
 let c_no_trail_space_error = 1
 let c_no_tab_space_error = 1
 
+<<<<<<< HEAD
 " markdown to html
 nmap <leader>md :%!markdown --html4tags <cr>
 
@@ -251,3 +249,5 @@ function! GetFiletypes()
 endfunction
 
 autocmd BufNewFile,BufRead *.symlink   set syntax=sh
+=======
+>>>>>>> f0e045e4bdcb186dec76cb95303dda78a1942550
