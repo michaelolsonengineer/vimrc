@@ -34,20 +34,27 @@ else
   colorscheme peaksea
 endif
 
+if exists('+colorcolumn')
+   set colorcolumn=80
+else
+   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
+set ttyfast                 " faster redrawing
+set nolazyredraw            " don't redraw while executing macros
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Cscope / Ctags / Path / Dictionary / Thesaurus
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " add possible vim ctags database locations and search recursively back for existing one
 "cd %:p:h change to current directory of open file
-set tags=/home/molson/current/tags
+set tags=$HOME/current/tags
 set tags+=./tags;
 set dictionary+=/usr/share/dict/words
-set dictionary+=/home/molson/current/tags
-set thesaurus+=/usr/share/thesaurus/moby.nix
+set dictionary+=$HOME/code/tags
 
 " add possible vim cscope database locations
-cs add /home/molson/current/cscope.out /home/molson/current
+cs add $HOME/current/cscope.out $HOME/code
 
 " <C-]> is for ctags finding definition
 ":ts or :tselect shows the list
@@ -112,11 +119,10 @@ nmap <C-S> :w!<CR>
 imap <C-S> <ESC>:w!<CR>a
 vmap <C-S> <ESC>:w!<CR>v
 
-nmap <C-A> ggVG
-imap <C-A> <ESC><C-A>a
-vmap <C-A> <ESC><C-A>v
+nmap <leader><leader>a ggVG
+vmap <leader><leader>a <ESC>ggVGv
 
-"set pastetoggle=<C-V>
+set pastetoggle=<leader>v
 
 noremap <Leader>y "*y
 noremap <Leader>v "*p
@@ -136,7 +142,6 @@ autocmd FileType vim                       let b:comment_leader = '" '
 " noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 " noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -151,8 +156,17 @@ noremap <S-right> :bnext<CR>
 nnoremap <Leader>l :ls<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fugitive Shortcuts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <silent> <leader>gs :Gstatus<cr>
+nmap <leader>ge :Gedit<cr>
+nmap <silent><leader>gr :Gread<cr>
+nmap <silent><leader>gb :Gblame<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => MISC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set shell=$SHELL
 "used by ctx as the update variable
 set updatetime=1000
 " remember more commands and search history
@@ -188,3 +202,52 @@ endfunc
 let java_space_errors = 1
 let c_no_trail_space_error = 1
 let c_no_tab_space_error = 1
+
+" markdown to html
+nmap <leader>md :%!markdown --html4tags <cr>
+
+" remove extra whitespace
+nmap <leader><space> :%s/\s\+$<cr>
+
+" search for word under the cursor
+nnoremap <leader>/ "fyiw :/<c-r>f<cr>
+
+" highlight conflicts
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+" error bells
+set noerrorbells
+set visualbell
+
+augroup myvimrc
+    au!
+    autocmd BufWritePost .vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+
+function! GetFiletypes()
+    " Get a list of all the runtime directories by taking the value of that
+    " option and splitting it using a comma as the separator.
+    let rtps = split(&runtimepath, ",")
+    " This will be the list of filetypes that the function returns
+    let filetypes = []
+
+    " Loop through each individual item in the list of runtime paths
+    for rtp in rtps
+        let syntax_dir = rtp . "/syntax"
+        " Check to see if there is a syntax directory in this runtimepath.
+        if (isdirectory(syntax_dir))
+            " Loop through each vimscript file in the syntax directory
+            for syntax_file in split(glob(syntax_dir . "/*.vim"), "\n")
+                " Add this file to the filetypes list with its everything
+                " except its name removed.
+                call add(filetypes, fnamemodify(syntax_file, ":t:r"))
+            endfor
+        endif
+    endfor
+
+    " This removes any duplicates and returns the resulting list.
+    " NOTE: This might not be the best way to do this, suggestions are welcome.
+    return uniq(sort(filetypes))
+endfunction
+
+autocmd BufNewFile,BufRead *.symlink   set syntax=sh
