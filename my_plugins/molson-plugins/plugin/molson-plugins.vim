@@ -7,7 +7,7 @@ func! MySys()
 endfunc
 
 func! GetMySourceRootPath()
-  return "/home/molson/current"
+  return "$HOME/code"
 endfunc
 
 func! Get_WorkSpace()
@@ -23,14 +23,14 @@ func! Get_Bovine()
 endfunc
 
 func! Get_Pentecost()
-    let l:workspace_directory="$HOME//svn/netcomm/ntcsrsvn_tools_build_trunk"
+    let l:workspace_directory="$HOME/svn/netcomm/ntcsrsvn_tools_build_trunk"
     execute 'cd '.l:workspace_directory
     call Rescope()
     let g:cscoped_directory=l:workspace_directory
 endfunc
 
 func! Get_Titan()
-    let l:workspace_directory="$HOME//svn/netcomm/ntcsrsvn_tools_build_trunk_2"
+    let l:workspace_directory="$HOME/svn/netcomm/ntcsrsvn_tools_build_trunk_2"
     execute 'cd '.l:workspace_directory
     call Rescope()
     let g:cscoped_directory=l:workspace_directory
@@ -38,21 +38,21 @@ func! Get_Titan()
 endfunc
 
 func! Get_Frankenstein()
-    let l:workspace_directory="$HOME//svn/netcomm/pentecost_frankenstein_dev"
+    let l:workspace_directory="$HOME/svn/netcomm/pentecost_frankenstein_dev"
     execute 'cd '.l:workspace_directory
     call Rescope()
     let g:cscoped_directory=l:workspace_directory
 endfunc
 
 func! Get_Frankenstein()
-    let l:workspace_directory="$HOME//svn/netcomm/pentecost_frankenstein_dev"
+    let l:workspace_directory="$HOME/svn/netcomm/pentecost_frankenstein_dev"
     execute 'cd '.l:workspace_directory
     call Rescope()
     let g:cscoped_directory=l:workspace_directory
 endfunc
 
 func! Get_Frankenstein1()
-    let l:workspace_directory="$HOME//svn/netcomm/pentecost_frankenstein_dev_1"
+    let l:workspace_directory="$HOME/svn/netcomm/pentecost_frankenstein_dev_1"
     execute 'cd '.l:workspace_directory
     call Rescope()
     let g:cscoped_directory=l:workspace_directory
@@ -165,8 +165,8 @@ if has("autocmd")
 endif
 
 "editing files in HEX mode (good for BLITs)
-nnoremap <C-H> :Hexmode<CR>
-inoremap <C-H> <Esc>:Hexmode<CR>
-vnoremap <C-H> :<C-U>Hexmode<CR>
+nnoremap <C-S-H> :Hexmode<CR>
+inoremap <C-S-H> <Esc>:Hexmode<CR>
+vnoremap <C-S-H> :<C-U>Hexmode<CR>
 
 

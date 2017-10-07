@@ -13,3 +13,9 @@
 [submodule "my_plugins/vim-wombat-scheme"]
 	path = my_plugins/vim-wombat-scheme
 	url = git@github.com:michaelolsonengineer/vim-wombat-scheme.git
+[submodule "my_plugins/vim-system-copy"]
+	path = my_plugins/vim-system-copy
+	url = https://github.com/christoomey/vim-system-copy.git
+[submodule "my_plugins/vim-easyclip"]
+	path = my_plugins/vim-easyclip
+	url = https://github.com/svermeulen/vim-easyclip.git

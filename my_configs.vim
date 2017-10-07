@@ -90,11 +90,24 @@ map <leader>r :call Rescope()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Windows Convenient Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Standard Shortcut to paste selection in insert and normal mode
-nmap <C-V> "+gp
-imap <C-V> <ESC><C-V>a
-vmap <C-V> x"+gPv
-cmap <C-V> <C-R>+
+set clipboard=unnamed
+let g:system_copy#copy_command='xclip -sel clipboard'
+"let g:system_copy#paste_command='xclip -sel clipboard -o'
+let g:EasyClipUseCutDefaults = 0
+let g:EasyClipAlwaysMoveCursorToEndOfPaste = -1
+nnoremap gm m
+nmap x <Plug>MoveMotionPlug
+xmap x <Plug>MoveMotionXPlug
+nmap xx <Plug>MoveMotionLinePlug
+nmap <leader>cf <plug>EasyClipToggleFormattedPaste
+
+" " Standard Shortcut to paste selection in insert and normal mode
+" nmap <C-V> "+gp
+" imap <C-V> <ESC><C-V>a
+" vmap <C-V> x"+gPv
+" cmap <C-V> <C-R>+
+imap <C-V> <Plug>EasyClipInsertModePaste
+cmap <C-V> <Plug>EasyClipCommandModePaste
 
 " Standard Shortcut to copy selection in insert and normal mode
 nmap <C-C> "+y
@@ -129,13 +142,14 @@ noremap <Leader>V "+p
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " =>  Commenting blocks of code
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType c,cpp,java,scala          let b:comment_leader = '// '
-autocmd FileType dts                       let b:comment_leader = '// '
-autocmd FileType sh,ruby,python            let b:comment_leader = '# '
-autocmd FileType conf,fstab                let b:comment_leader = '# '
-autocmd FileType tex                       let b:comment_leader = '% '
-autocmd FileType mail                      let b:comment_leader = '> '
-autocmd FileType vim                       let b:comment_leader = '" '
+noremap <leader>/ :Commentary<cr>
+" autocmd FileType c,cpp,java,scala          let b:comment_leader = '// '
+" autocmd FileType dts                       let b:comment_leader = '// '
+" autocmd FileType sh,ruby,python            let b:comment_leader = '# '
+" autocmd FileType conf,fstab                let b:comment_leader = '# '
+" autocmd FileType tex                       let b:comment_leader = '% '
+" autocmd FileType mail                      let b:comment_leader = '> '
+" autocmd FileType vim                       let b:comment_leader = '" '
 " noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 " noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
@@ -200,7 +214,6 @@ let java_space_errors = 1
 let c_no_trail_space_error = 1
 let c_no_tab_space_error = 1
 
-<<<<<<< HEAD
 " markdown to html
 nmap <leader>md :%!markdown --html4tags <cr>
 
@@ -208,19 +221,11 @@ nmap <leader>md :%!markdown --html4tags <cr>
 nmap <leader><space> :%s/\s\+$<cr>
 
 " search for word under the cursor
-nnoremap <leader>/ "fyiw :/<c-r>f<cr>
-
-" highlight conflicts
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+nnoremap ;;/ "fyiw :/<c-r>f<cr>
 
 " error bells
 set noerrorbells
 set visualbell
-
-augroup myvimrc
-    au!
-    autocmd BufWritePost .vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-augroup END
 
 function! GetFiletypes()
     " Get a list of all the runtime directories by taking the value of that
@@ -249,5 +254,4 @@ function! GetFiletypes()
 endfunction
 
 autocmd BufNewFile,BufRead *.symlink   set syntax=sh
-=======
->>>>>>> f0e045e4bdcb186dec76cb95303dda78a1942550
+
