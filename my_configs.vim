@@ -35,6 +35,7 @@ else
   set background=dark
   colorscheme peaksea
   hi clear ColorColumn
+  set paste
 endif
 
 set ttyfast                 " faster redrawing
@@ -132,7 +133,7 @@ vmap <C-S> <ESC>:w!<CR>v
 nmap <leader><leader>a ggVG
 vmap <leader><leader>a <ESC>ggVGv
 
-set pastetoggle=<leader>v
+"set pastetoggle=<leader>v
 
 noremap <Leader>y "*y
 noremap <Leader>v "*p
